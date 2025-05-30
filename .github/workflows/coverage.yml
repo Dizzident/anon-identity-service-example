@@ -1,0 +1,80 @@
+name: Coverage Report
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  coverage:
+    name: Test Coverage Report
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: read
+      pull-requests: write
+      
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Run tests with coverage
+        run: npm run test:coverage
+        
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./coverage/lcov.info
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: false
+          
+      - name: Generate coverage report comment
+        uses: romeovs/lcov-reporter-action@v0.3.1
+        if: github.event_name == 'pull_request'
+        with:
+          lcov-file: ./coverage/lcov.info
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Check coverage thresholds
+        run: |
+          echo "### Coverage Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Metric | Threshold | Actual |" >> $GITHUB_STEP_SUMMARY
+          echo "|--------|-----------|--------|" >> $GITHUB_STEP_SUMMARY
+          
+          # Extract coverage percentages from the test output
+          COVERAGE_OUTPUT=$(npm run test:coverage 2>&1 | tail -20)
+          
+          # Parse and display coverage metrics
+          echo "$COVERAGE_OUTPUT" | grep -E "(Statements|Branches|Functions|Lines)" | while read -r line; do
+            METRIC=$(echo "$line" | awk '{print $1}')
+            PERCENTAGE=$(echo "$line" | grep -oE '[0-9]+\.[0-9]+' | head -1)
+            
+            case $METRIC in
+              "Statements") THRESHOLD="85%" ;;
+              "Branches") THRESHOLD="80%" ;;
+              "Functions") THRESHOLD="85%" ;;
+              "Lines") THRESHOLD="85%" ;;
+            esac
+            
+            echo "| $METRIC | $THRESHOLD | ${PERCENTAGE}% |" >> $GITHUB_STEP_SUMMARY
+          done
+          
+      - name: Upload coverage artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: |
+            coverage/lcov-report/
+            coverage/lcov.info
+          retention-days: 7

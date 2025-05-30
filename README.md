@@ -1,5 +1,12 @@
 # Anonymous Identity Service Example
 
+![CI](https://github.com/Dizzident/anon-identity-service-example/workflows/CI/badge.svg)
+![Node.js Version](https://img.shields.io/badge/node-%3E%3D18-brightgreen)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.8-blue)
+![License](https://img.shields.io/badge/license-ISC-blue)
+![Docker](https://img.shields.io/badge/docker-ready-blue)
+![Coverage](https://img.shields.io/badge/coverage-check-yellow)
+
 A Node.js web server that demonstrates enterprise-grade verification of W3C Verifiable Credentials and Presentations using the `anon-identity` npm package v1.0.5. This service showcases advanced features including session management, batch processing, structured presentation requests, and comprehensive error handling.
 
 ## 🎯 Purpose
