@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import type { Request, Response, NextFunction } from 'express';
 import rateLimitMiddleware from '../../src/middleware/rate-limit.middleware';
 import CacheService from '../../src/services/cache.service';
 import { RateLimitError } from '../../src/utils/errors';
@@ -260,10 +260,18 @@ describe('Rate Limit Middleware', () => {
   describe('getRateLimitStatus', () => {
     it('should return current rate limit status', async () => {
       mockCacheService.getRateLimit.mockImplementation((key) => {
-        if (key === 'general:127.0.0.1') return Promise.resolve(150);
-        if (key === 'auth:127.0.0.1') return Promise.resolve(25);
-        if (key === 'verification:127.0.0.1') return Promise.resolve(5);
-        if (key === 'session:sess-123') return Promise.resolve(50);
+        if (key === 'general:127.0.0.1') {
+          return Promise.resolve(150);
+        }
+        if (key === 'auth:127.0.0.1') {
+          return Promise.resolve(25);
+        }
+        if (key === 'verification:127.0.0.1') {
+          return Promise.resolve(5);
+        }
+        if (key === 'session:sess-123') {
+          return Promise.resolve(50);
+        }
         return Promise.resolve(0);
       });
 

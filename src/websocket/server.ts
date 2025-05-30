@@ -1,7 +1,7 @@
 import { Server as SocketIOServer } from 'socket.io';
-import { Server as HTTPServer } from 'http';
-import ServiceProviderService from '../services/service-provider.service';
-import CacheService from '../services/cache.service';
+import type { Server as HTTPServer } from 'http';
+import type ServiceProviderService from '../services/service-provider.service';
+import type CacheService from '../services/cache.service';
 import { config } from '../config';
 import logger from '../utils/logger';
 

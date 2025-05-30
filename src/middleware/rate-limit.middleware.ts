@@ -1,5 +1,5 @@
 import rateLimit from 'express-rate-limit';
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
 import { config } from '../config';
 import logger from '../utils/logger';
 import { rateLimitErrorHandler } from './error.middleware';

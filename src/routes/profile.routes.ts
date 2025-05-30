@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import ProfileController from '../controllers/profile.controller';
-import AuthMiddleware from '../middleware/auth.middleware';
+import type ProfileController from '../controllers/profile.controller';
+import type AuthMiddleware from '../middleware/auth.middleware';
 import rateLimitMiddleware from '../middleware/rate-limit.middleware';
 import serviceConfig from '../config/service.config';
 

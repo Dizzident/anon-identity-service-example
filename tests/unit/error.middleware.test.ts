@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import type { Request, Response, NextFunction } from 'express';
 import errorMiddleware from '../../src/middleware/error.middleware';
 import {
   ValidationError,

@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import VerificationController from '../controllers/verification.controller';
-import SessionController from '../controllers/session.controller';
-import AuthMiddleware from '../middleware/auth.middleware';
+import type VerificationController from '../controllers/verification.controller';
+import type SessionController from '../controllers/session.controller';
+import type AuthMiddleware from '../middleware/auth.middleware';
 import rateLimitMiddleware from '../middleware/rate-limit.middleware';
 
 export function createAuthRoutes(

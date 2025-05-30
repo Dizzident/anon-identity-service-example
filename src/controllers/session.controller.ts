@@ -1,6 +1,6 @@
-import { Request, Response } from 'express';
-import ServiceProviderService from '../services/service-provider.service';
-import CacheService from '../services/cache.service';
+import type { Request, Response } from 'express';
+import type ServiceProviderService from '../services/service-provider.service';
+import type CacheService from '../services/cache.service';
 import serviceConfig from '../config/service.config';
 import logger from '../utils/logger';
 import {

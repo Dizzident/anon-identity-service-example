@@ -1,7 +1,7 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
 import SessionController from '../../src/controllers/session.controller';
-import ServiceProviderService from '../../src/services/service-provider.service';
-import CacheService from '../../src/services/cache.service';
+import type ServiceProviderService from '../../src/services/service-provider.service';
+import type CacheService from '../../src/services/cache.service';
 import { 
   ValidationError, 
   SessionNotFoundError, 
@@ -445,7 +445,7 @@ describe('SessionController', () => {
         id: 'session-123',
         holderDID: 'did:test:holder',
         createdAt: new Date(now - 7200000), // 2 hours ago
-        expiresAt: new Date(now - 3600000)  // 1 hour ago (expired)
+        expiresAt: new Date(now - 3600000) // 1 hour ago (expired)
       };
 
       mockRequest.params = { id: 'session-123' };

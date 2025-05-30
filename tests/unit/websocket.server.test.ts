@@ -1,8 +1,8 @@
 import { Server as SocketIOServer } from 'socket.io';
-import { Server as HttpServer } from 'http';
+import type { Server as HttpServer } from 'http';
 import WebSocketServer from '../../src/websocket.server';
-import ServiceProviderService from '../../src/services/service-provider.service';
-import CacheService from '../../src/services/cache.service';
+import type ServiceProviderService from '../../src/services/service-provider.service';
+import type CacheService from '../../src/services/cache.service';
 
 // Mock dependencies
 jest.mock('socket.io');
@@ -500,7 +500,9 @@ describe('WebSocketServer', () => {
   describe('server management', () => {
     it('should close server gracefully', async () => {
       mockSocketIOServer.close.mockImplementation((callback) => {
-        if (callback) callback();
+        if (callback) {
+          callback();
+        }
         return mockSocketIOServer;
       });
 
@@ -513,7 +515,9 @@ describe('WebSocketServer', () => {
     it('should handle close errors', async () => {
       const error = new Error('Close failed');
       mockSocketIOServer.close.mockImplementation((callback) => {
-        if (callback) callback(error);
+        if (callback) {
+          callback(error);
+        }
         return mockSocketIOServer;
       });
 

@@ -18,45 +18,45 @@ export const config = {
   redis: {
     url: process.env.REDIS_URL || 'redis://localhost:6379',
     password: process.env.REDIS_PASSWORD || undefined,
-    db: parseInt(process.env.REDIS_DB || '0', 10),
+    db: parseInt(process.env.REDIS_DB || '0', 10)
   },
 
   // Session Configuration
   session: {
     defaultDuration: parseInt(process.env.SESSION_DEFAULT_DURATION || '3600', 10),
     maxDuration: parseInt(process.env.SESSION_MAX_DURATION || '86400', 10),
-    cleanupInterval: parseInt(process.env.SESSION_CLEANUP_INTERVAL || '300', 10),
+    cleanupInterval: parseInt(process.env.SESSION_CLEANUP_INTERVAL || '300', 10)
   },
 
   // Batch Processing Configuration
   batch: {
     maxConcurrency: parseInt(process.env.BATCH_MAX_CONCURRENCY || '10', 10),
-    timeoutMs: parseInt(process.env.BATCH_TIMEOUT_MS || '15000', 10),
+    timeoutMs: parseInt(process.env.BATCH_TIMEOUT_MS || '15000', 10)
   },
 
   // Rate Limiting
   rateLimit: {
     windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS || '900000', 10), // 15 minutes
     maxRequests: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS || '100', 10),
-    batchMaxRequests: parseInt(process.env.RATE_LIMIT_BATCH_MAX_REQUESTS || '10', 10),
+    batchMaxRequests: parseInt(process.env.RATE_LIMIT_BATCH_MAX_REQUESTS || '10', 10)
   },
 
   // Logging
   logging: {
     level: process.env.LOG_LEVEL || 'info',
-    format: process.env.LOG_FORMAT || 'combined',
+    format: process.env.LOG_FORMAT || 'combined'
   },
 
   // CORS Configuration
   cors: {
     origin: process.env.CORS_ORIGIN || '*',
-    credentials: process.env.CORS_CREDENTIALS === 'true',
+    credentials: process.env.CORS_CREDENTIALS === 'true'
   },
 
   // Security
   security: {
     helmetEnabled: process.env.HELMET_ENABLED !== 'false',
-    compressionEnabled: process.env.COMPRESSION_ENABLED !== 'false',
+    compressionEnabled: process.env.COMPRESSION_ENABLED !== 'false'
   },
 
   // Trusted Issuers
@@ -68,20 +68,20 @@ export const config = {
   // WebSocket Configuration
   websocket: {
     enabled: process.env.WEBSOCKET_ENABLED !== 'false',
-    corsOrigin: process.env.WEBSOCKET_CORS_ORIGIN || '*',
+    corsOrigin: process.env.WEBSOCKET_CORS_ORIGIN || '*'
   },
 
   // Error Handling
   errorHandling: {
     includeStackTrace: process.env.INCLUDE_STACK_TRACE === 'true' || process.env.NODE_ENV === 'development',
     logErrors: process.env.LOG_ERRORS !== 'false',
-    maxErrorHistory: parseInt(process.env.MAX_ERROR_HISTORY || '1000', 10),
+    maxErrorHistory: parseInt(process.env.MAX_ERROR_HISTORY || '1000', 10)
   },
 
   // Development helpers
   isDevelopment: process.env.NODE_ENV === 'development',
   isProduction: process.env.NODE_ENV === 'production',
-  isTest: process.env.NODE_ENV === 'test',
+  isTest: process.env.NODE_ENV === 'test'
 };
 
 export default config;

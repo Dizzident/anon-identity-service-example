@@ -1,14 +1,12 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
-import ServiceProviderService from '../services/service-provider.service';
-import CacheService from '../services/cache.service';
+import type ServiceProviderService from '../services/service-provider.service';
+import type CacheService from '../services/cache.service';
 import serviceConfig from '../config/service.config';
 import logger from '../utils/logger';
 import {
   ValidationError,
-  InvalidPresentationError,
-  MissingAttributesError,
-  ServiceError
+  InvalidPresentationError
 } from '../utils/errors';
 import { asyncHandler } from '../middleware/error.middleware';
 

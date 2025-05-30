@@ -1,7 +1,7 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
 import VerificationController from '../../src/controllers/verification.controller';
-import ServiceProviderService from '../../src/services/service-provider.service';
-import CacheService from '../../src/services/cache.service';
+import type ServiceProviderService from '../../src/services/service-provider.service';
+import type CacheService from '../../src/services/cache.service';
 import { ValidationError, InvalidPresentationError } from '../../src/utils/errors';
 
 // Mock dependencies

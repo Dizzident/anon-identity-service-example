@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import ServiceController from '../controllers/service.controller';
-import VerificationController from '../controllers/verification.controller';
+import type ServiceController from '../controllers/service.controller';
+import type VerificationController from '../controllers/verification.controller';
 import rateLimitMiddleware from '../middleware/rate-limit.middleware';
 
 export function createServiceRoutes(

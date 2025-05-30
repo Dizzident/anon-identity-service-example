@@ -1,4 +1,5 @@
-import express, { Application } from 'express';
+import type { Application } from 'express';
+import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import compression from 'compression';
@@ -19,16 +20,16 @@ export function createApp(): Application {
     app.use(helmet({
       contentSecurityPolicy: {
         directives: {
-          defaultSrc: ["'self'"],
-          scriptSrc: ["'self'", "'unsafe-inline'"],
-          styleSrc: ["'self'", "'unsafe-inline'"],
-          imgSrc: ["'self'", "data:", "https:"],
-          connectSrc: ["'self'", "ws:", "wss:"],
-          fontSrc: ["'self'"],
-          objectSrc: ["'none'"],
-          mediaSrc: ["'self'"],
-          frameSrc: ["'none'"],
-        },
+          defaultSrc: ['\'self\''],
+          scriptSrc: ['\'self\'', '\'unsafe-inline\''],
+          styleSrc: ['\'self\'', '\'unsafe-inline\''],
+          imgSrc: ['\'self\'', 'data:', 'https:'],
+          connectSrc: ['\'self\'', 'ws:', 'wss:'],
+          fontSrc: ['\'self\''],
+          objectSrc: ['\'none\''],
+          mediaSrc: ['\'self\''],
+          frameSrc: ['\'none\'']
+        }
       },
       crossOriginEmbedderPolicy: false
     }));

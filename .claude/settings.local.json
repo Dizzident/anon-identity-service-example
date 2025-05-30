@@ -11,7 +11,9 @@
       "Bash(grep:*)",
       "Bash(mkdir:*)",
       "Bash(npm run build:*)",
-      "Bash(touch:*)"
+      "Bash(touch:*)",
+      "Bash(npm run lint)",
+      "Bash(npm run lint:*)"
     ],
     "deny": []
   }

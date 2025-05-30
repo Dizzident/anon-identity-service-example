@@ -153,18 +153,18 @@ export class BatchProcessingError extends ServiceError {
 // Error factory functions
 export const createVerificationError = (code: string, message: string, context: any = {}) => {
   switch (code) {
-    case 'EXPIRED_CREDENTIAL':
-      return new ExpiredCredentialError(context.credentialId, context);
-    case 'REVOKED_CREDENTIAL':
-      return new RevokedCredentialError(context.credentialId, context);
-    case 'UNTRUSTED_ISSUER':
-      return new UntrustedIssuerError(context.issuerDID, context);
-    case 'INVALID_SIGNATURE':
-      return new InvalidSignatureError(context);
-    case 'MISSING_REQUIRED_ATTRIBUTE':
-      return new MissingAttributesError(context.requiredAttributes || [], context);
-    default:
-      return new ValidationError(message, { ...context, originalCode: code });
+  case 'EXPIRED_CREDENTIAL':
+    return new ExpiredCredentialError(context.credentialId, context);
+  case 'REVOKED_CREDENTIAL':
+    return new RevokedCredentialError(context.credentialId, context);
+  case 'UNTRUSTED_ISSUER':
+    return new UntrustedIssuerError(context.issuerDID, context);
+  case 'INVALID_SIGNATURE':
+    return new InvalidSignatureError(context);
+  case 'MISSING_REQUIRED_ATTRIBUTE':
+    return new MissingAttributesError(context.requiredAttributes || [], context);
+  default:
+    return new ValidationError(message, { ...context, originalCode: code });
   }
 };
 

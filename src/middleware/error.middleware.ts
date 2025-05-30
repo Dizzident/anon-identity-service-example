@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import type { Request, Response, NextFunction } from 'express';
 import { ServiceError, isServiceError } from '../utils/errors';
 import logger from '../utils/logger';
 import { config } from '../config';

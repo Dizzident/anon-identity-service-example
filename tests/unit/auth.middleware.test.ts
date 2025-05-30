@@ -1,6 +1,6 @@
-import { Request, Response, NextFunction } from 'express';
+import type { Request, Response, NextFunction } from 'express';
 import AuthMiddleware from '../../src/middleware/auth.middleware';
-import ServiceProviderService from '../../src/services/service-provider.service';
+import type ServiceProviderService from '../../src/services/service-provider.service';
 import {
   AuthenticationError,
   SessionNotFoundError,

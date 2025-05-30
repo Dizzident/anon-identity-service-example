@@ -1,5 +1,5 @@
-import { Request, Response, NextFunction } from 'express';
-import ServiceProviderService from '../services/service-provider.service';
+import type { Request, Response, NextFunction } from 'express';
+import type ServiceProviderService from '../services/service-provider.service';
 import logger from '../utils/logger';
 import {
   AuthenticationError,

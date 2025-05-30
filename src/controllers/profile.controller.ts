@@ -1,6 +1,5 @@
-import { Request, Response } from 'express';
-import CacheService from '../services/cache.service';
-import serviceConfig from '../config/service.config';
+import type { Request, Response } from 'express';
+import type CacheService from '../services/cache.service';
 import logger from '../utils/logger';
 import { AuthenticationError, ValidationError } from '../utils/errors';
 import { asyncHandler } from '../middleware/error.middleware';
@@ -127,7 +126,7 @@ export class ProfileController {
       holderDID: session.holderDID,
       requiredAge: ageThreshold,
       verified: ageVerified,
-      hasExactAge: !!actualAge
+      hasExactAge: Boolean(actualAge)
     });
 
     res.json({
@@ -135,7 +134,7 @@ export class ProfileController {
       ageVerification: {
         verified: ageVerified,
         requiredAge: ageThreshold,
-        hasExactAge: !!actualAge,
+        hasExactAge: Boolean(actualAge),
         // Only return exact age if explicitly disclosed
         ...(actualAge !== undefined && { actualAge })
       }
@@ -167,8 +166,8 @@ export class ProfileController {
     logger.info('Financial profile accessed', {
       sessionId: session.id,
       holderDID: session.holderDID,
-      hasCreditScore: !!creditScore,
-      hasIncome: !!session.attributes.income
+      hasCreditScore: Boolean(creditScore),
+      hasIncome: Boolean(session.attributes.income)
     });
 
     res.json({
@@ -177,8 +176,8 @@ export class ProfileController {
         id: session.holderDID,
         qualifications: {
           ageVerified: isOver21,
-          creditScoreVerified: !!creditScore,
-          incomeVerified: !!session.attributes.income,
+          creditScoreVerified: Boolean(creditScore),
+          incomeVerified: Boolean(session.attributes.income),
           creditScore: creditScore,
           ...(session.attributes.income && { 
             incomeRange: this.getIncomeRange(session.attributes.income) 
@@ -205,13 +204,13 @@ export class ProfileController {
         ...preferences,
         personalizedName: session.attributes.givenName,
         country: session.attributes.country,
-        hasContact: !!(session.attributes.emailAddress || session.attributes.phoneNumber)
+        hasContact: Boolean(session.attributes.emailAddress || session.attributes.phoneNumber)
       }
     });
   });
 
   // Update user preferences (this would typically require re-verification)
-  updatePreferences = asyncHandler(async (req: Request, res: Response): Promise<void> => {
+  updatePreferences = asyncHandler(async (req: Request, _res: Response): Promise<void> => {
     if (!req.session) {
       throw new AuthenticationError('Session required');
     }
@@ -288,11 +287,21 @@ export class ProfileController {
   }
 
   private getIncomeRange(income: number): string {
-    if (income < 30000) return 'Under $30K';
-    if (income < 50000) return '$30K - $50K';
-    if (income < 75000) return '$50K - $75K';
-    if (income < 100000) return '$75K - $100K';
-    if (income < 150000) return '$100K - $150K';
+    if (income < 30000) {
+      return 'Under $30K';
+    }
+    if (income < 50000) {
+      return '$30K - $50K';
+    }
+    if (income < 75000) {
+      return '$50K - $75K';
+    }
+    if (income < 100000) {
+      return '$75K - $100K';
+    }
+    if (income < 150000) {
+      return '$100K - $150K';
+    }
     return 'Over $150K';
   }
 }
